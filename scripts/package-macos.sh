@@ -28,13 +28,16 @@ mkdir -p "pkgroot/Library/Audio/Plug-Ins/VST3" "pkgroot/Library/Audio/Plug-Ins/C
 ditto "$VST3" "pkgroot/Library/Audio/Plug-Ins/VST3/$NAME.vst3"
 ditto "$AU"   "pkgroot/Library/Audio/Plug-Ins/Components/$NAME.component"
 
-# Bundles immer an diesen Ort installieren (nicht in eine gefundene ältere Kopie "umziehen")
+# Bundles immer an diesen Ort installieren (nicht in eine gefundene ältere Kopie "umziehen").
+# plutil -replace legt den Schalter an, falls pkgbuild ihn nicht eingetragen hat.
 pkgbuild --analyze --root pkgroot component.plist
 i=0
 while /usr/libexec/PlistBuddy -c "Print :$i" component.plist >/dev/null 2>&1; do
-    /usr/libexec/PlistBuddy -c "Set :$i:BundleIsRelocatable false" component.plist
+    plutil -replace "$i.BundleIsRelocatable" -bool NO component.plist \
+        || echo "Hinweis: Eintrag $i konnte nicht angepasst werden (unkritisch)"
     i=$((i + 1))
 done
+plutil -p component.plist
 
 # Nach der Installation den AU-Cache auffrischen, damit Logic/Ableton das AU sofort sehen
 mkdir -p pkgscripts
