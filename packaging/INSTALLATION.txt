@@ -1,0 +1,31 @@
+NOVA Leitstern – Installation auf dem Mac
+=========================================
+
+WEG A: Installer (empfohlen)
+----------------------------
+1. Doppelklick auf "NOVA-Leitstern-…-Installer.pkg".
+2. macOS meldet beim ersten Mal, dass der Entwickler nicht verifiziert ist
+   (das Plugin ist nicht bei Apple registriert). Dann:
+   Systemeinstellungen → Datenschutz & Sicherheit → ganz unten
+   "Trotzdem öffnen" klicken → Installer läuft durch (Passwort eingeben).
+3. Fertig. Das Plugin liegt jetzt in
+   /Library/Audio/Plug-Ins/VST3       (für Ableton)
+   /Library/Audio/Plug-Ins/Components (AU, für Logic)
+
+WEG B: Von Hand kopieren
+------------------------
+1. "NOVA-Leitstern-…-Plugins.zip" entpacken.
+2. "NOVA Leitstern.vst3" nach  ~/Library/Audio/Plug-Ins/VST3/  ziehen,
+   "NOVA Leitstern.component" nach  ~/Library/Audio/Plug-Ins/Components/
+   (im Finder: Gehe zu → Gehe zum Ordner … → Pfad einfügen).
+3. Weil die Dateien aus dem Internet kommen, einmal im Terminal freigeben:
+   xattr -cr ~/Library/Audio/Plug-Ins/VST3/"NOVA Leitstern.vst3"
+   xattr -cr ~/Library/Audio/Plug-Ins/Components/"NOVA Leitstern.component"
+
+IN ABLETON
+----------
+Einstellungen → Plug-Ins → "VST3-Plug-In-Systemordner verwenden" einschalten
+→ "Neu scannen". Das Plugin steht dann unter Plug-Ins → NOVA →
+NOVA Leitstern. Am besten als letztes Plugin auf den Master legen.
+
+Bei einer neuen Version: einfach neu installieren und Ableton neu starten.
